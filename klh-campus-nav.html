@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusIQ — KLH University Bachupally</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050b14;--surface:#0d1a2e;--surface2:#112240;
+  --accent:#00f5d4;--accent2:#f72585;--accent3:#7209b7;
+  --gold:#ffd60a;--text:#e2e8f0;--muted:#8892a4;
+  --card:rgba(17,34,64,0.85);
+  --glow:0 0 30px rgba(0,245,212,0.3);
+  --glow2:0 0 30px rgba(247,37,133,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(114,9,183,0.15) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 20%,rgba(0,245,212,0.1) 0%,transparent 50%),
+             radial-gradient(ellipse at 60% 80%,rgba(247,37,133,0.08) 0%,transparent 50%);
+  pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(5,11,20,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,245,212,0.15);
+  padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:0.15rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;padding:0.4rem 0.7rem;border-radius:6px;
+  font-size:0.82rem;font-weight:500;transition:all 0.2s;}
+.nav-links a:hover{color:var(--accent);background:rgba(0,245,212,0.08);}
+.nav-cta{background:linear-gradient(135deg,var(--accent3),var(--accent2));
+  color:#fff;border:none;padding:0.45rem 1rem;border-radius:8px;
+  font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.2s;}
+.nav-cta:hover{transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:7rem 2rem 4rem;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(0,245,212,0.1);border:1px solid rgba(0,245,212,0.3);
+  color:var(--accent);padding:0.4rem 1rem;border-radius:100px;
+  font-size:0.78rem;font-family:'Space Mono',monospace;margin-bottom:2rem;animation:fadeUp 0.8s ease both;}
+.hero-badge::before{content:'●';animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+h1{font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2.5rem,7vw,5.5rem);line-height:1.05;letter-spacing:-2px;
+  margin-bottom:1.5rem;animation:fadeUp 0.8s 0.15s ease both;}
+h1 span.grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{max-width:580px;color:var(--muted);font-size:1.05rem;line-height:1.7;
+  margin-bottom:2.5rem;animation:fadeUp 0.8s 0.3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.8s 0.45s ease both;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent3));
+  color:#fff;border:none;padding:0.8rem 2rem;border-radius:12px;
+  font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.2s,box-shadow 0.2s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+.btn-secondary{background:transparent;border:1px solid rgba(0,245,212,0.4);
+  color:var(--accent);padding:0.8rem 2rem;border-radius:12px;
+  font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-secondary:hover{background:rgba(0,245,212,0.08);}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1.2rem;padding:2.5rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.stat-card{background:var(--card);border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;padding:1.3rem;text-align:center;backdrop-filter:blur(10px);transition:transform 0.3s;}
+.stat-card:hover{transform:translateY(-4px);box-shadow:var(--glow);}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{color:var(--muted);font-size:0.8rem;margin-top:0.3rem;}
+
+/* SECTION */
+.section{padding:4rem 2rem;max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+.section-tag{font-family:'Space Mono',monospace;font-size:0.72rem;
+  color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:0.6rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:800;letter-spacing:-1px;margin-bottom:0.8rem;}
+.section-title span{color:var(--accent);}
+.section-desc{color:var(--muted);max-width:550px;line-height:1.7;margin-bottom:2.5rem;}
+
+/* ===================== BUILDING MAP ===================== */
+.map-section{position:relative;z-index:1;padding:4rem 2rem;}
+.map-outer{max-width:1200px;margin:0 auto;
+  background:var(--card);border:1px solid rgba(0,245,212,0.2);
+  border-radius:24px;overflow:hidden;box-shadow:var(--glow);}
+.map-top-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;
+  padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.07);background:rgba(0,0,0,0.35);}
+.map-top-bar h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;}
+.map-live{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--accent);}
+.map-live::before{content:'●';animation:pulse 1.5s infinite;}
+
+/* Floor tabs */
+.floor-tabs{display:flex;gap:0.5rem;padding:1rem 1.5rem;
+  background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.06);flex-wrap:wrap;}
+.ftab{background:rgba(17,34,64,0.7);border:1px solid rgba(255,255,255,0.1);
+  color:var(--muted);padding:0.4rem 1rem;border-radius:8px;
+  font-size:0.8rem;cursor:pointer;transition:all 0.2s;font-family:'Space Mono',monospace;white-space:nowrap;}
+.ftab:hover{border-color:rgba(0,245,212,0.4);color:var(--accent);}
+.ftab.active{background:rgba(0,245,212,0.15);border-color:var(--accent);color:var(--accent);}
+
+/* Floor canvas area */
+.floor-view{padding:1.5rem;background:#071020;}
+.floor-panel{display:none;}
+.floor-panel.active{display:block;}
+
+/* SVG building map */
+.building-svg{width:100%;max-width:900px;display:block;margin:0 auto;
+  border-radius:12px;overflow:hidden;}
+
+/* Room styles inside SVG — applied via class on rect */
+.room-default{fill:rgba(0,245,212,0.08);stroke:rgba(0,245,212,0.35);stroke-width:1.5;
+  cursor:pointer;transition:fill 0.2s;}
+.room-default:hover{fill:rgba(0,245,212,0.22);}
+.room-special{fill:rgba(247,37,133,0.1);stroke:rgba(247,37,133,0.4);stroke-width:1.5;cursor:pointer;}
+.room-special:hover{fill:rgba(247,37,133,0.25);}
+.room-wash{fill:rgba(114,9,183,0.1);stroke:rgba(114,9,183,0.4);stroke-width:1.5;}
+.room-lift{fill:rgba(255,214,10,0.12);stroke:rgba(255,214,10,0.5);stroke-width:1.5;cursor:pointer;}
+.room-lobby{fill:rgba(0,245,212,0.15);stroke:rgba(0,245,212,0.5);stroke-width:2;}
+.room-gate{fill:rgba(247,37,133,0.2);stroke:rgba(247,37,133,0.6);stroke-width:2;}
+.room-lab{fill:rgba(4,180,120,0.12);stroke:rgba(4,180,120,0.4);stroke-width:1.5;cursor:pointer;}
+.room-lab:hover{fill:rgba(4,180,120,0.25);}
+.room-caf{fill:rgba(255,140,0,0.12);stroke:rgba(255,140,0,0.4);stroke-width:1.5;cursor:pointer;}
+.room-caf:hover{fill:rgba(255,140,0,0.25);}
+.room-aud{fill:rgba(99,60,200,0.15);stroke:rgba(99,60,200,0.5);stroke-width:1.5;cursor:pointer;}
+.room-aud:hover{fill:rgba(99,60,200,0.3);}
+.room-road{fill:rgba(255,255,255,0.04);stroke:rgba(255,255,255,0.12);stroke-width:1;}
+.room-buses{fill:rgba(255,214,10,0.08);stroke:rgba(255,214,10,0.3);stroke-width:1;}
+svg text{font-family:'DM Sans',sans-serif;pointer-events:none;dominant-baseline:middle;text-anchor:middle;}
+
+/* Map legend */
+.map-legend{display:flex;flex-wrap:wrap;gap:1rem;
+  padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);}
+.leg{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* Room info popup */
+.room-popup{position:fixed;z-index:5000;background:rgba(13,26,46,0.97);
+  border:1px solid rgba(0,245,212,0.4);border-radius:14px;
+  padding:1rem 1.2rem;max-width:260px;box-shadow:var(--glow);
+  font-size:0.85rem;line-height:1.5;display:none;pointer-events:none;backdrop-filter:blur(10px);}
+.room-popup h4{font-family:'Syne',sans-serif;color:var(--accent);margin-bottom:0.3rem;font-size:0.95rem;}
+.room-popup p{color:var(--muted);font-size:0.8rem;}
+
+/* ===================== ROUTE ===================== */
+.route-demo{background:var(--card);border:1px solid rgba(0,245,212,0.2);border-radius:24px;padding:2rem;box-shadow:var(--glow);}
+.route-inputs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
+@media(max-width:580px){.route-inputs{grid-template-columns:1fr;}}
+.route-input-group{display:flex;flex-direction:column;gap:0.4rem;}
+.route-input-group label{font-size:0.78rem;color:var(--muted);font-family:'Space Mono',monospace;}
+.route-input-group select{background:rgba(5,11,20,0.8);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);padding:0.65rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;cursor:pointer;transition:border-color 0.2s;}
+.route-input-group select:focus{border-color:var(--accent);}
+.route-opts{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:1rem;}
+.route-opts label{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--muted);cursor:pointer;}
+.route-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent3));
+  color:#fff;border:none;padding:0.85rem;border-radius:12px;
+  font-size:1rem;font-weight:600;cursor:pointer;font-family:'Syne',sans-serif;transition:transform 0.2s,box-shadow 0.2s;}
+.route-btn:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+.route-result{margin-top:1.5rem;display:none;}
+.route-result.show{display:block;animation:fadeUp 0.4s ease;}
+.route-steps{display:flex;flex-direction:column;background:rgba(0,0,0,0.3);border-radius:14px;overflow:hidden;}
+.route-step{display:flex;align-items:flex-start;gap:1rem;padding:0.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.route-step:last-child{border-bottom:none;}
+.step-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.78rem;font-weight:700;flex-shrink:0;margin-top:2px;}
+.step-dot.start{background:rgba(0,245,212,0.2);color:var(--accent);border:2px solid var(--accent);}
+.step-dot.mid{background:rgba(114,9,183,0.2);color:#b35efb;border:2px solid #b35efb;}
+.step-dot.end{background:rgba(247,37,133,0.2);color:var(--accent2);border:2px solid var(--accent2);}
+.step-info h4{font-size:0.88rem;font-weight:600;margin-bottom:0.18rem;}
+.step-info p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+.step-lm{font-size:0.7rem;color:var(--accent);margin-top:3px;}
+.step-dist{font-size:0.68rem;color:var(--muted);margin-top:2px;}
+.route-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.2rem;
+  padding:1rem;background:rgba(0,245,212,0.06);border-radius:12px;border:1px solid rgba(0,245,212,0.15);}
+.meta-item{display:flex;flex-direction:column;gap:0.2rem;}
+.meta-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--accent);}
+.meta-key{font-size:0.72rem;color:var(--muted);}
+
+/* ===================== CHAT ===================== */
+.chat-container{background:var(--card);border:1px solid rgba(0,245,212,0.2);
+  border-radius:24px;overflow:hidden;box-shadow:var(--glow);max-width:700px;margin:0 auto;}
+.chat-header{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;
+  background:linear-gradient(135deg,rgba(114,9,183,0.3),rgba(0,245,212,0.1));
+  border-bottom:1px solid rgba(255,255,255,0.07);}
+.chat-avatar{width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent3),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.chat-info h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;}
+.chat-info p{font-size:0.72rem;color:var(--accent);}
+.chat-body{height:380px;overflow-y:auto;padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;}
+.chat-body::-webkit-scrollbar{width:4px;}
+.chat-body::-webkit-scrollbar-thumb{background:rgba(0,245,212,0.3);border-radius:2px;}
+.msg{max-width:85%;padding:0.75rem 1rem;border-radius:14px;font-size:0.875rem;line-height:1.6;}
+.msg.bot{background:rgba(114,9,183,0.2);border:1px solid rgba(114,9,183,0.3);
+  border-bottom-left-radius:4px;align-self:flex-start;}
+.msg.user{background:linear-gradient(135deg,rgba(0,245,212,0.2),rgba(0,245,212,0.1));
+  border:1px solid rgba(0,245,212,0.3);border-bottom-right-radius:4px;align-self:flex-end;}
+.msg.typing{background:rgba(114,9,183,0.2);border:1px solid rgba(114,9,183,0.3);align-self:flex-start;}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:4px 0;}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dot 1.2s infinite;}
+.typing-dots span:nth-child(2){animation-delay:0.2s;}
+.typing-dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes dot{0%,80%,100%{opacity:0.3;transform:scale(0.8);}40%{opacity:1;transform:scale(1);}}
+.quick-chips{display:flex;flex-wrap:wrap;gap:0.5rem;padding:0.75rem 1.2rem;
+  border-top:1px solid rgba(255,255,255,0.05);}
+.chip{background:rgba(17,34,64,0.8);border:1px solid rgba(0,245,212,0.2);
+  color:var(--muted);padding:0.35rem 0.85rem;border-radius:100px;
+  font-size:0.75rem;cursor:pointer;transition:all 0.2s;}
+.chip:hover{border-color:var(--accent);color:var(--accent);}
+.chat-input{display:flex;gap:0.75rem;padding:1rem 1.2rem;
+  border-top:1px solid rgba(255,255,255,0.07);background:rgba(0,0,0,0.2);}
+.chat-input input{flex:1;background:rgba(5,11,20,0.8);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);padding:0.65rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+.chat-input input:focus{border-color:var(--accent);}
+.chat-send{background:linear-gradient(135deg,var(--accent),var(--accent3));
+  color:#fff;border:none;padding:0.65rem 1.1rem;border-radius:10px;cursor:pointer;font-size:1rem;transition:transform 0.2s;}
+.chat-send:hover{transform:scale(1.06);}
+.ai-badge{display:inline-flex;align-items:center;gap:4px;font-size:0.62rem;
+  font-family:'Space Mono',monospace;background:rgba(0,245,212,0.1);
+  border:1px solid rgba(0,245,212,0.2);color:var(--accent);
+  padding:2px 7px;border-radius:4px;margin-top:5px;}
+
+/* ===================== FACULTY ===================== */
+.faculty-search{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:1.5rem;}
+.faculty-search-bar{display:flex;gap:0.75rem;margin-bottom:1.2rem;}
+.faculty-search-bar input{flex:1;background:rgba(5,11,20,0.8);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);padding:0.65rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
+.faculty-search-bar input:focus{border-color:var(--accent);}
+.faculty-search-btn{background:linear-gradient(135deg,var(--accent),var(--accent3));
+  color:#fff;border:none;padding:0.65rem 1.2rem;border-radius:10px;cursor:pointer;font-weight:600;}
+.faculty-list{display:flex;flex-direction:column;gap:0.65rem;}
+.faculty-card{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;
+  background:rgba(5,11,20,0.5);border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;padding:0.9rem 1.1rem;transition:border-color 0.2s;}
+.faculty-card:hover{border-color:rgba(0,245,212,0.3);}
+.faculty-info{display:flex;align-items:center;gap:0.75rem;}
+.faculty-avatar{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:700;}
+.faculty-details h4{font-size:0.88rem;font-weight:600;}
+.faculty-details p{font-size:0.75rem;color:var(--muted);}
+.faculty-room{text-align:right;}
+.faculty-room span{font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--accent);}
+.faculty-room small{display:block;font-size:0.7rem;color:var(--muted);}
+.route-tag{margin-top:4px;font-size:0.7rem;color:var(--accent2);cursor:pointer;font-family:'Space Mono',monospace;}
+.route-tag:hover{text-decoration:underline;}
+
+/* ===================== FEATURES ===================== */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem;}
+.feature-card{background:var(--card);border:1px solid rgba(255,255,255,0.07);
+  border-radius:18px;padding:1.5rem;transition:all 0.3s;position:relative;}
+.feature-card:hover{transform:translateY(-4px);border-color:rgba(0,245,212,0.2);}
+.feature-icon{width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
+.feature-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;}
+.feature-card p{color:var(--muted);font-size:0.83rem;line-height:1.6;}
+
+/* ===================== GAME ===================== */
+.game-wrapper{background:var(--card);border:1px solid rgba(0,245,212,0.2);
+  border-radius:24px;overflow:hidden;box-shadow:var(--glow);max-width:500px;margin:0 auto;}
+.game-header{display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.07);background:rgba(0,0,0,0.3);}
+.game-header h3{font-family:'Syne',sans-serif;font-weight:700;}
+.game-stats{display:flex;gap:1.5rem;}
+.game-stat{display:flex;flex-direction:column;align-items:center;}
+.game-stat span:first-child{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--accent);}
+.game-stat span:last-child{font-size:0.65rem;color:var(--muted);}
+#tetris-board{display:block;margin:0 auto;background:#060e1c;}
+.game-controls{padding:0.9rem 1.4rem;border-top:1px solid rgba(255,255,255,0.07);background:rgba(0,0,0,0.2);}
+.game-btns{display:flex;gap:0.6rem;justify-content:center;margin-bottom:0.75rem;}
+.game-btn{background:rgba(17,34,64,0.8);border:1px solid rgba(0,245,212,0.3);
+  color:var(--accent);padding:0.45rem 1rem;border-radius:8px;cursor:pointer;
+  font-family:'Space Mono',monospace;font-size:0.78rem;transition:all 0.2s;}
+.game-btn:hover{background:rgba(0,245,212,0.1);}
+.game-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border:none;}
+.touch-controls{display:grid;grid-template-columns:repeat(3,46px);gap:5px;justify-content:center;margin-top:0.5rem;}
+.tc-btn{width:46px;height:46px;background:rgba(17,34,64,0.9);border:1px solid rgba(0,245,212,0.2);
+  border-radius:9px;color:var(--accent);font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all 0.15s;user-select:none;}
+.tc-btn:active{background:rgba(0,245,212,0.2);}
+.game-hint{text-align:center;font-size:0.7rem;color:var(--muted);font-family:'Space Mono',monospace;margin-top:0.5rem;}
+
+/* HEATMAP */
+.heatmap-container{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:1.5rem;}
+.heatmap-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;border-radius:8px;overflow:hidden;}
+.hm-cell{height:42px;border-radius:3px;transition:all 0.6s;cursor:pointer;}
+
+/* FOOTER */
+footer{text-align:center;padding:2.5rem 2rem;color:var(--muted);font-size:0.83rem;
+  border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:1;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.4rem;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+  background:rgba(13,26,46,0.97);border:1px solid rgba(0,245,212,0.3);
+  color:var(--text);padding:0.7rem 1.4rem;border-radius:100px;
+  font-size:0.83rem;z-index:9999;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s;
+  opacity:0;backdrop-filter:blur(10px);white-space:nowrap;max-width:90vw;text-align:center;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- ROOM INFO POPUP -->
+<div class="room-popup" id="roomPopup">
+  <h4 id="popupTitle">Room</h4>
+  <p id="popupDesc">Info</p>
+</div>
+
+<nav>
+  <div class="logo">🧭 CampusIQ — KLH Bachupally</div>
+  <ul class="nav-links">
+    <li><a href="#map">Map</a></li>
+    <li><a href="#navigate">Navigate</a></li>
+    <li><a href="#assistant">CampusBot</a></li>
+    <li><a href="#faculty">Faculty</a></li>
+    <li><a href="#game">Play</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollTo({top:document.getElementById('navigate').offsetTop-80,behavior:'smooth'})">Get Directions</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">KLH University — Bachupally Campus · Single Building · All Floors</div>
+  <h1>Navigate <span class="grad">KLH Campus</span><br>Like a Pro</h1>
+  <p class="hero-sub">Real floor-by-floor map of KLH Bachupally's main building. Step-by-step directions, AI-powered CampusBot, faculty finder — all in one place.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="scrollTo({top:document.getElementById('navigate').offsetTop-80,behavior:'smooth'})">🧭 Find My Route</button>
+    <button class="btn-secondary" onclick="scrollTo({top:document.getElementById('assistant').offsetTop-80,behavior:'smooth'})">💬 Ask CampusBot</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card"><div class="stat-num" id="s1">0</div><div class="stat-label">Floors Mapped</div></div>
+  <div class="stat-card"><div class="stat-num" id="s2">0</div><div class="stat-label">Rooms & Zones</div></div>
+  <div class="stat-card"><div class="stat-num" id="s3">0</div><div class="stat-label">Faculty Listed</div></div>
+  <div class="stat-card"><div class="stat-num" id="s4">0</div><div class="stat-label">Routes Available</div></div>
+  <div class="stat-card"><div class="stat-num" id="s5">0</div><div class="stat-label">Lifts in Building</div></div>
+</div>
+
+<!-- ==================== KLH BUILDING MAP ==================== -->
+<section class="map-section" id="map">
+  <div style="max-width:1200px;margin:0 auto;padding:0 0 1.2rem;">
+    <div class="section-tag">INTERACTIVE BUILDING MAP</div>
+    <h2 class="section-title">KLH <span>Building</span> — Floor by Floor</h2>
+    <p style="color:var(--muted);font-size:0.88rem;">KLH Bachupally is a single main building. Click a floor tab to explore each level. Click any room for details.</p>
+  </div>
+  <div class="map-outer">
+    <div class="map-top-bar">
+      <h3>🏛️ KLH University Main Building — Bachupally, Hyderabad</h3>
+      <span class="map-live">Live Map · 5 Floors</span>
+    </div>
+
+    <!-- Floor Tabs -->
+    <div class="floor-tabs">
+      <button class="ftab active" onclick="switchFloor('ground',this)">🏠 Ground (0F)</button>
+      <button class="ftab" onclick="switchFloor('first',this)">1️⃣ 1st Floor</button>
+      <button class="ftab" onclick="switchFloor('second',this)">2️⃣ 2nd Floor</button>
+      <button class="ftab" onclick="switchFloor('third',this)">3️⃣ 3rd Floor</button>
+      <button class="ftab" onclick="switchFloor('fourth',this)">4️⃣ 4th Floor</button>
+    </div>
+
+    <div class="floor-view">
+
+      <!-- GROUND FLOOR -->
+      <div class="floor-panel active" id="floor-ground">
+        <svg class="building-svg" viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="920" height="520" fill="#060e1c"/>
+
+          <!-- === OUTSIDE LEFT — Back Gate + Buses === -->
+          <rect fill="rgba(247,37,133,0.18)" stroke="rgba(247,37,133,0.5)" stroke-width="1.5" x="12" y="175" width="58" height="85" rx="5"
+            onclick="showRoom('Back Gate','Secondary exit at the rear-left of the building. Used by staff. Leads to road behind campus.')"/>
+          <text x="41" y="209" font-size="10" fill="#f72585" font-weight="bold" text-anchor="middle">🚪</text>
+          <text x="41" y="222" font-size="9" fill="#f72585" text-anchor="middle">Back</text>
+          <text x="41" y="234" font-size="9" fill="#f72585" text-anchor="middle">Gate</text>
+
+          <rect fill="rgba(255,214,10,0.1)" stroke="rgba(255,214,10,0.3)" stroke-width="1" x="12" y="395" width="80" height="105" rx="6"
+            onclick="showRoom('Bus Parking','College buses parked here. Left side of main building, outside campus.')"/>
+          <text x="52" y="438" font-size="14" fill="rgba(255,214,10,0.85)" text-anchor="middle">🚌</text>
+          <text x="52" y="455" font-size="10" fill="rgba(255,214,10,0.65)" text-anchor="middle">Buses</text>
+          <text x="52" y="468" font-size="9" fill="rgba(255,214,10,0.45)" text-anchor="middle">Parking</text>
+
+          <!-- Side road -->
+          <rect x="72" y="155" width="28" height="355" fill="rgba(255,255,255,0.03)"/>
+
+          <!-- === MAIN BUILDING === -->
+          <rect x="102" y="55" width="806" height="380" rx="10" fill="rgba(0,5,18,0.7)" stroke="rgba(0,245,212,0.45)" stroke-width="2"/>
+          <text x="505" y="76" font-size="11" fill="rgba(0,245,212,0.35)" font-family="Space Mono,monospace" text-anchor="middle">GROUND FLOOR (0F)</text>
+
+          <!-- TOP HALF: Girls Common Room | Dispensary | IoT Lab | Lobby+Principal+Accounts+Lift -->
+
+          <!-- Girls Common Room -->
+          <rect class="room-special" x="118" y="88" width="185" height="130" rx="6"
+            onclick="showRoom('Girls Common Room','Dedicated rest space for female students. Seating, lockers, notice board. Ground floor, left wing.')"/>
+          <text x="210" y="145" font-size="13" fill="#f72585" font-weight="bold" text-anchor="middle">👩 Girls</text>
+          <text x="210" y="162" font-size="11" fill="rgba(247,37,133,0.65)" text-anchor="middle">Common Room</text>
+
+          <!-- Dispensary -->
+          <rect class="room-default" x="316" y="88" width="155" height="130" rx="6"
+            onclick="showRoom('Dispensary','First aid and basic medical help. Nurse/doctor available during college hours. Ground floor, centre wing.')"/>
+          <text x="393" y="143" font-size="14" fill="rgba(0,245,212,0.9)" text-anchor="middle">🩺</text>
+          <text x="393" y="161" font-size="11" fill="rgba(0,245,212,0.7)" text-anchor="middle">Dispensary</text>
+
+          <!-- IoT Lab -->
+          <rect class="room-lab" x="484" y="88" width="185" height="130" rx="6"
+            onclick="showRoom('IoT Lab','Internet of Things lab. Raspberry Pi, Arduino kits, embedded systems. Used for IoT projects. Ground floor, right-centre wing.')"/>
+          <text x="576" y="145" font-size="13" fill="#04b478" font-weight="bold" text-anchor="middle">📡 IoT Lab</text>
+          <text x="576" y="162" font-size="10" fill="rgba(4,180,120,0.6)" text-anchor="middle">Raspberry Pi · Arduino</text>
+
+          <!-- Lobby + Principal Office + Accounts + Lift (right block, full height) -->
+          <rect class="room-lobby" x="682" y="88" width="214" height="255" rx="6"
+            onclick="showRoom('Lobby, Principal Office &amp; Accounts','Main lobby. Principal office and accounts section are here. Enter straight from the front gate. Lift located inside this zone.')"/>
+          <text x="789" y="175" font-size="13" fill="rgba(0,245,212,0.95)" font-weight="bold" text-anchor="middle">🏛️ Lobby</text>
+          <text x="789" y="193" font-size="11" fill="rgba(0,245,212,0.7)" text-anchor="middle">Principal Office</text>
+          <text x="789" y="211" font-size="10" fill="rgba(0,245,212,0.55)" text-anchor="middle">Accounts Section</text>
+          <!-- Lift inside lobby -->
+          <rect class="room-lift" x="738" y="275" width="70" height="55" rx="4"
+            onclick="showRoom('Lift (Ground Floor)','Main lift. Access to 1st, 2nd, 3rd and 4th floors. Inside the Lobby near principal office.')"/>
+          <text x="773" y="307" font-size="12" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <!-- Horizontal corridor -->
+          <rect x="102" y="228" width="806" height="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <text x="448" y="242" font-size="9" fill="rgba(255,255,255,0.18)" font-family="Space Mono,monospace" text-anchor="middle">MAIN CORRIDOR</text>
+
+          <!-- BOTTOM HALF: Boys Common Room | Staircase to -1F labs | (Lobby continues right) -->
+
+          <!-- Boys Common Room -->
+          <rect class="room-special" x="118" y="260" width="185" height="130" rx="6"
+            onclick="showRoom('Boys Common Room','Rest and recreation area for male students. Seating, lockers, notice board. Ground floor, left wing.')"/>
+          <text x="210" y="318" font-size="13" fill="#f72585" font-weight="bold" text-anchor="middle">👨 Boys</text>
+          <text x="210" y="335" font-size="11" fill="rgba(247,37,133,0.65)" text-anchor="middle">Common Room</text>
+
+          <!-- Staircase area centre — down to IT Labs -->
+          <rect x="316" y="260" width="352" height="130" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"
+            onclick="showRoom('Ground Floor Centre — Staircase Access','Central corridor with staircase access. Go DOWN for IT Labs (−1 floor). Go UP for 1st, 2nd, 3rd and 4th floors via stairs or lift.')"/>
+          <text x="492" y="315" font-size="12" fill="rgba(255,255,255,0.5)" text-anchor="middle">🪜 Staircase</text>
+          <text x="492" y="333" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">↓ IT Labs (−1F)</text>
+          <text x="492" y="350" font-size="10" fill="rgba(255,255,255,0.3)" text-anchor="middle">↑ 1st, 2nd, 3rd, 4th Floors</text>
+
+          <!-- === OUTSIDE/BELOW: Cafeteria + IT Labs + Front Gate === -->
+          <!-- These sit below the main building per blueprint -->
+
+          <!-- Cafeteria -->
+          <rect class="room-caf" x="102" y="438" width="175" height="85" rx="6"
+            onclick="showRoom('Cafeteria','College canteen. Breakfast, lunch and snacks. Open Mon–Sat 7:30 AM – 9:30 PM. Ground level, left-front of building.')"/>
+          <text x="189" y="476" font-size="13" fill="rgba(255,140,0,0.95)" font-weight="bold" text-anchor="middle">🍽️ Cafeteria</text>
+          <text x="189" y="494" font-size="9" fill="rgba(255,140,0,0.6)" text-anchor="middle">7:30 AM – 9:30 PM</text>
+
+          <!-- IT Lab -1F -->
+          <rect class="room-lab" x="292" y="438" width="160" height="85" rx="6"
+            onclick="showRoom('IT Lab (−1 Floor)','First computer lab in the basement (−1F). 60 computers. CS and IT practicals — Java, Python, DBMS. Access via staircase from ground floor.')"/>
+          <text x="372" y="471" font-size="12" fill="#04b478" font-weight="bold" text-anchor="middle">💻 IT Lab 1</text>
+          <text x="372" y="488" font-size="10" fill="rgba(4,180,120,0.6)" text-anchor="middle">−1 Floor · 60 PCs</text>
+
+          <!-- IT Lab 2 -1F -->
+          <rect class="room-lab" x="467" y="438" width="160" height="85" rx="6"
+            onclick="showRoom('IT Lab 2 (−1 Floor)','Second computer lab in the basement (−1F). 60 systems. Programming, networking and OS labs. Access via basement staircase.')"/>
+          <text x="547" y="471" font-size="12" fill="#04b478" font-weight="bold" text-anchor="middle">💻 IT Lab 2</text>
+          <text x="547" y="488" font-size="10" fill="rgba(4,180,120,0.6)" text-anchor="middle">−1 Floor · 60 PCs</text>
+
+          <!-- Front Gate (bottom centre-right) -->
+          <rect class="room-gate" x="660" y="448" width="115" height="70" rx="6"
+            onclick="showRoom('Front Gate','Main entrance of KLH University Bachupally. Security post here. Walk straight in to reach the Lobby and Principal Office.')"/>
+          <text x="717" y="479" font-size="13" fill="#f72585" font-weight="bold" text-anchor="middle">🚪 Front Gate</text>
+          <text x="717" y="496" font-size="9" fill="rgba(247,37,133,0.6)" text-anchor="middle">↑ Straight to Lobby</text>
+
+          <!-- Arrow up from gate -->
+          <line x1="717" y1="443" x2="717" y2="435" stroke="rgba(247,37,133,0.45)" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <!-- 1ST FLOOR -->
+      <div class="floor-panel" id="floor-first">
+        <svg class="building-svg" viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="920" height="400" fill="#060e1c"/>
+          <rect x="10" y="10" width="900" height="375" rx="10" fill="rgba(0,5,18,0.7)" stroke="rgba(0,245,212,0.45)" stroke-width="2"/>
+          <text x="460" y="30" font-size="11" fill="rgba(0,245,212,0.35)" font-family="Space Mono,monospace" text-anchor="middle">1ST FLOOR</text>
+
+          <!-- TOP ROW: SAC Office | Classes | Boys WC | Lift | Girls WC -->
+          <rect class="room-special" x="25" y="48" width="155" height="130" rx="6"
+            onclick="showRoom('SAC Office (1st Floor)','Student Activity Centre. Manages clubs, cultural fests, sports registrations and events. Open during college hours. 1st floor, left end.')"/>
+          <text x="102" y="105" font-size="13" fill="#f72585" font-weight="bold" text-anchor="middle">🎓 SAC</text>
+          <text x="102" y="122" font-size="10" fill="rgba(247,37,133,0.65)" text-anchor="middle">Office</text>
+
+          <rect class="room-default" x="192" y="48" width="280" height="130" rx="6"
+            onclick="showRoom('Classrooms — Left Wing (1st Floor)','Multiple classrooms. CSE, ECE, IT. Each ~60 students. Projector equipped. 1st floor left-centre.')"/>
+          <text x="332" y="105" font-size="14" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖 Classes</text>
+          <text x="332" y="122" font-size="10" fill="rgba(0,245,212,0.5)" text-anchor="middle">CSE · ECE · IT</text>
+
+          <rect class="room-wash" x="484" y="48" width="160" height="130" rx="6"
+            onclick="showRoom('Boys Washroom (1st Floor — Top)','Boys washroom, 1st floor top-right section.')"/>
+          <text x="564" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚹 Boys WC</text>
+
+          <rect class="room-lift" x="656" y="48" width="80" height="130" rx="5"
+            onclick="showRoom('Lift (1st Floor)','Building lift on 1st floor. Access to all floors. Right wing.')"/>
+          <text x="696" y="105" font-size="12" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <rect class="room-wash" x="748" y="48" width="157" height="130" rx="6"
+            onclick="showRoom('Girls Washroom (1st Floor — Top)','Girls washroom, 1st floor top-right section, next to lift.')"/>
+          <text x="826" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚺 Girls WC</text>
+
+          <!-- Corridor -->
+          <rect x="10" y="188" width="900" height="20" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <text x="460" y="201" font-size="9" fill="rgba(255,255,255,0.18)" font-family="Space Mono,monospace" text-anchor="middle">CORRIDOR — 1ST FLOOR</text>
+
+          <!-- BOTTOM ROW: Classes (wide) | Boys WC | Girls WC -->
+          <rect class="room-default" x="25" y="218" width="430" height="148" rx="6"
+            onclick="showRoom('Classrooms — Right Wing (1st Floor)','Larger classroom block. MECH, Civil, MBA. Projector rooms. ~60 per room. 1st floor bottom section.')"/>
+          <text x="240" y="285" font-size="14" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖 Classes</text>
+          <text x="240" y="303" font-size="10" fill="rgba(0,245,212,0.5)" text-anchor="middle">MECH · Civil · MBA</text>
+
+          <rect class="room-wash" x="468" y="218" width="185" height="110" rx="6"
+            onclick="showRoom('Boys Washroom (1st Floor — Bottom)','Boys washroom on lower section of 1st floor, near staircase.')"/>
+          <text x="560" y="275" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚹 Boys WC</text>
+
+          <rect class="room-wash" x="665" y="218" width="240" height="110" rx="6"
+            onclick="showRoom('Girls Washroom (1st Floor — Bottom)','Girls washroom, lower section 1st floor, near lift.')"/>
+          <text x="785" y="275" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚺 Girls WC</text>
+
+          <text x="460" y="385" font-size="9" fill="rgba(255,255,255,0.2)" font-family="Space Mono,monospace" text-anchor="middle">🪜 ↓ Ground Floor  ·  ↑ 2nd Floor  ·  🛗 Lift: right wing</text>
+        </svg>
+      </div>
+
+      <!-- 2ND FLOOR -->
+      <div class="floor-panel" id="floor-second">
+        <svg class="building-svg" viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="920" height="400" fill="#060e1c"/>
+          <rect x="10" y="10" width="900" height="375" rx="10" fill="rgba(0,5,18,0.7)" stroke="rgba(0,245,212,0.45)" stroke-width="2"/>
+          <text x="460" y="30" font-size="11" fill="rgba(0,245,212,0.35)" font-family="Space Mono,monospace" text-anchor="middle">2ND FLOOR</text>
+
+          <!-- TOP: Large Classes | Lift | Boys WC | Girls WC -->
+          <rect class="room-default" x="25" y="48" width="445" height="130" rx="6"
+            onclick="showRoom('Classrooms — Top Wing (2nd Floor)','Main classroom block. All engineering departments. Smart boards, projectors. ~60 per room.')"/>
+          <text x="247" y="105" font-size="15" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖  C L A S S E S</text>
+          <text x="247" y="123" font-size="10" fill="rgba(0,245,212,0.45)" text-anchor="middle">CSE · ECE · MECH · Civil · IT · MBA</text>
+
+          <rect class="room-lift" x="482" y="48" width="82" height="130" rx="5"
+            onclick="showRoom('Lift (2nd Floor)','Building lift. Connects all floors. Right wing.')"/>
+          <text x="523" y="107" font-size="12" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <rect class="room-wash" x="576" y="48" width="160" height="130" rx="6"
+            onclick="showRoom('Boys Washroom (2nd Floor)','Boys washroom. 2nd floor right wing, next to lift.')"/>
+          <text x="656" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚹 Boys WC</text>
+
+          <rect class="room-wash" x="748" y="48" width="157" height="130" rx="6"
+            onclick="showRoom('Girls Washroom (2nd Floor)','Girls washroom. 2nd floor right wing.')"/>
+          <text x="826" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚺 Girls WC</text>
+
+          <!-- Corridor -->
+          <rect x="10" y="188" width="900" height="20" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <text x="460" y="201" font-size="9" fill="rgba(255,255,255,0.18)" font-family="Space Mono,monospace" text-anchor="middle">CORRIDOR — 2ND FLOOR</text>
+
+          <!-- BOTTOM: Extended Classes -->
+          <rect class="room-default" x="25" y="218" width="870" height="148" rx="6"
+            onclick="showRoom('Classrooms — Extended Wing (2nd Floor)','Large classroom block. All departments. Overflow batches, electives. Projector and whiteboard every room.')"/>
+          <text x="460" y="285" font-size="15" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖  C L A S S E S  —  Extended Wing</text>
+          <text x="460" y="305" font-size="10" fill="rgba(0,245,212,0.4)" text-anchor="middle">All Departments · Projector Equipped</text>
+
+          <text x="460" y="385" font-size="9" fill="rgba(255,255,255,0.2)" font-family="Space Mono,monospace" text-anchor="middle">🪜 ↓ 1st Floor  ·  ↑ 3rd Floor  ·  🛗 Lift: right wing</text>
+        </svg>
+      </div>
+
+      <!-- 3RD FLOOR -->
+      <div class="floor-panel" id="floor-third">
+        <svg class="building-svg" viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="920" height="400" fill="#060e1c"/>
+          <rect x="10" y="10" width="900" height="375" rx="10" fill="rgba(0,5,18,0.7)" stroke="rgba(0,245,212,0.45)" stroke-width="2"/>
+          <text x="460" y="30" font-size="11" fill="rgba(0,245,212,0.35)" font-family="Space Mono,monospace" text-anchor="middle">3RD FLOOR</text>
+
+          <!-- TOP: Auditorium (left) | Classes (centre) | Lift | Boys WC | Girls WC -->
+          <rect class="room-aud" x="25" y="48" width="280" height="130" rx="6"
+            onclick="showRoom('Auditorium (3rd Floor)','Auditorium for seminars, guest lectures, cultural events. AC, stage, mic. 3rd floor left wing.')"/>
+          <text x="165" y="105" font-size="14" fill="rgba(99,60,200,0.95)" font-weight="bold" text-anchor="middle">🎭 Auditorium</text>
+          <text x="165" y="122" font-size="10" fill="rgba(99,60,200,0.65)" text-anchor="middle">Seminars · Events</text>
+
+          <rect class="room-default" x="317" y="48" width="158" height="130" rx="6"
+            onclick="showRoom('Classrooms (3rd Floor — Top)','Classrooms upper section. Final year batches and senior lectures.')"/>
+          <text x="396" y="107" font-size="13" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖 Classes</text>
+
+          <rect class="room-lift" x="487" y="48" width="82" height="130" rx="5"
+            onclick="showRoom('Lift (3rd Floor)','Building lift on 3rd floor. Connects all floors.')"/>
+          <text x="528" y="107" font-size="12" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <rect class="room-wash" x="581" y="48" width="160" height="130" rx="6"
+            onclick="showRoom('Boys Washroom (3rd Floor)','Boys washroom on 3rd floor right wing.')"/>
+          <text x="661" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚹 Boys WC</text>
+
+          <rect class="room-wash" x="753" y="48" width="152" height="130" rx="6"
+            onclick="showRoom('Girls Washroom (3rd Floor)','Girls washroom on 3rd floor right wing.')"/>
+          <text x="829" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚺 Girls WC</text>
+
+          <!-- Corridor -->
+          <rect x="10" y="188" width="900" height="20" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <text x="460" y="201" font-size="9" fill="rgba(255,255,255,0.18)" font-family="Space Mono,monospace" text-anchor="middle">CORRIDOR — 3RD FLOOR</text>
+
+          <!-- BOTTOM: Wide Classes -->
+          <rect class="room-default" x="25" y="218" width="870" height="148" rx="6"
+            onclick="showRoom('Classrooms — Lower Wing (3rd Floor)','Large classroom block. 3rd and final year batches. Smart board equipped.')"/>
+          <text x="460" y="285" font-size="15" fill="rgba(0,245,212,0.9)" font-weight="bold" text-anchor="middle">📖  C L A S S E S</text>
+          <text x="460" y="305" font-size="10" fill="rgba(0,245,212,0.4)" text-anchor="middle">3rd Year &amp; Final Year Batches</text>
+
+          <text x="460" y="385" font-size="9" fill="rgba(255,255,255,0.2)" font-family="Space Mono,monospace" text-anchor="middle">🪜 ↓ 2nd Floor  ·  ↑ 4th Floor  ·  🛗 Lift: right wing</text>
+        </svg>
+      </div>
+
+      <!-- 4TH FLOOR -->
+      <div class="floor-panel" id="floor-fourth">
+        <svg class="building-svg" viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="920" height="400" fill="#060e1c"/>
+          <rect x="10" y="10" width="900" height="375" rx="10" fill="rgba(0,5,18,0.7)" stroke="rgba(0,245,212,0.45)" stroke-width="2"/>
+          <text x="460" y="30" font-size="11" fill="rgba(0,245,212,0.35)" font-family="Space Mono,monospace" text-anchor="middle">4TH FLOOR (TOP FLOOR)</text>
+
+          <!-- MAIN AUDITORIUM — large left+centre block (bigger than 3F) -->
+          <rect class="room-aud" x="25" y="48" width="408" height="308" rx="6"
+            onclick="showRoom('Main Auditorium (4th Floor)','Largest auditorium at KLH Bachupally. Major events — annual day, convocation, department fests. Large stage, full AC, projector, sound system. ~500 seats. Top floor, left wing.')"/>
+          <text x="229" y="178" font-size="16" fill="rgba(99,60,200,0.95)" font-weight="bold" text-anchor="middle">🎭 Auditorium</text>
+          <text x="229" y="200" font-size="12" fill="rgba(99,60,200,0.7)" text-anchor="middle">Main Hall — 4th Floor</text>
+          <text x="229" y="220" font-size="10" fill="rgba(99,60,200,0.5)" text-anchor="middle">~500 Seats · AC · Stage · Sound</text>
+          <text x="229" y="238" font-size="10" fill="rgba(99,60,200,0.4)" text-anchor="middle">Annual Day · Convocation · Fests</text>
+
+          <!-- Lift 4F -->
+          <rect class="room-lift" x="446" y="48" width="82" height="130" rx="5"
+            onclick="showRoom('Lift (4th Floor)','Lift at top floor. Returns to lower floors only. Located right wing.')"/>
+          <text x="487" y="107" font-size="12" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <!-- Boys WC 4F -->
+          <rect class="room-wash" x="540" y="48" width="170" height="130" rx="6"
+            onclick="showRoom('Boys Washroom (4th Floor)','Boys washroom on 4th floor, right wing next to lift.')"/>
+          <text x="625" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚹 Boys WC</text>
+
+          <!-- Girls WC 4F -->
+          <rect class="room-wash" x="722" y="48" width="183" height="130" rx="6"
+            onclick="showRoom('Girls Washroom (4th Floor)','Girls washroom on 4th floor, far right wing.')"/>
+          <text x="813" y="105" font-size="13" fill="rgba(114,9,183,0.9)" text-anchor="middle">🚺 Girls WC</text>
+
+          <!-- Small secondary lift (right per blueprint) -->
+          <rect class="room-lift" x="722" y="192" width="80" height="60" rx="4"
+            onclick="showRoom('Secondary Lift (4th Floor)','Second lift access point on 4th floor right side.')"/>
+          <text x="762" y="227" font-size="11" fill="#ffd60a" text-anchor="middle">🛗 Lift</text>
+
+          <!-- Top floor info -->
+          <rect x="446" y="310" width="459" height="55" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <text x="675" y="334" font-size="12" fill="rgba(255,255,255,0.35)" text-anchor="middle">🏠 Top Floor — No Access Above</text>
+          <text x="675" y="352" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="middle">Terrace via admin permission only</text>
+
+          <text x="460" y="390" font-size="9" fill="rgba(255,255,255,0.2)" font-family="Space Mono,monospace" text-anchor="middle">🪜 ↓ 3rd Floor only  ·  🛗 Lift returns to Ground</text>
+        </svg>
+      </div>
+
+    </div><!-- /floor-view -->
+
+    <!-- Legend -->
+    <div class="map-legend">
+      <div class="leg"><div class="leg-dot" style="background:rgba(0,245,212,0.4)"></div>Classrooms/General</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(247,37,133,0.5)"></div>Special/Admin</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(4,180,120,0.5)"></div>Labs</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(255,140,0,0.5)"></div>Cafeteria</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(99,60,200,0.5)"></div>Auditorium</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(255,214,10,0.5)"></div>Lift</div>
+      <div class="leg"><div class="leg-dot" style="background:rgba(114,9,183,0.4)"></div>Washrooms</div>
+      <div class="leg">💡 Click any room for details</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ROUTE NAVIGATION ==================== -->
+<section class="section" id="navigate">
+  <div class="section-tag">ROUTE PLANNER</div>
+  <h2 class="section-title">Find Your <span>Route</span></h2>
+  <p class="section-desc">Pick where you are and where you want to go — get step-by-step directions inside the KLH building.</p>
+  <div class="route-demo">
+    <div class="route-inputs">
+      <div class="route-input-group">
+        <label>📍 FROM — Your Current Location</label>
+        <select id="fromLoc">
+          <option value="front_gate">🚪 Front Gate</option>
+          <option value="lobby">🏛️ Lobby (Ground Floor)</option>
+          <option value="cafeteria">🍽️ Cafeteria (Ground Floor)</option>
+          <option value="dispensary">🏥 Dispensary (Ground Floor)</option>
+          <option value="iot_lab">📡 IoT Lab (Basement)</option>
+          <option value="it_lab">💻 IT Lab (Basement)</option>
+          <option value="boys_cr">👨 Boys Common Room (Ground)</option>
+          <option value="girls_cr">👩 Girls Common Room (Ground)</option>
+          <option value="sac">🎓 SAC Office (1st Floor)</option>
+          <option value="class_1f">📖 Classrooms (1st Floor)</option>
+          <option value="class_2f">📖 Classrooms (2nd Floor)</option>
+          <option value="aud_3f">🎭 Auditorium A (3rd Floor)</option>
+          <option value="hod_3f">👨‍🏫 HOD Office (3rd Floor)</option>
+          <option value="aud_4f">🎭 Main Auditorium (4th Floor)</option>
+          <option value="back_gate">🚪 Back Gate</option>
+        </select>
+      </div>
+      <div class="route-input-group">
+        <label>🏁 TO — Your Destination</label>
+        <select id="toLoc">
+          <option value="cafeteria">🍽️ Cafeteria (Ground Floor)</option>
+          <option value="lobby">🏛️ Lobby / Principal Office</option>
+          <option value="iot_lab">📡 IoT Lab (Basement)</option>
+          <option value="it_lab">💻 IT Lab (Basement)</option>
+          <option value="dispensary">🏥 Dispensary (Ground Floor)</option>
+          <option value="boys_cr">👨 Boys Common Room</option>
+          <option value="girls_cr">👩 Girls Common Room</option>
+          <option value="sac">🎓 SAC Office (1st Floor)</option>
+          <option value="class_1f">📖 Classrooms (1st Floor)</option>
+          <option value="class_2f">📖 Classrooms (2nd Floor)</option>
+          <option value="class_3f">📖 Classrooms (3rd Floor)</option>
+          <option value="aud_3f">🎭 Auditorium A (3rd Floor)</option>
+          <option value="hod_3f">👨‍🏫 HOD Office (3rd Floor)</option>
+          <option value="aud_4f">🎭 Main Auditorium (4th Floor)</option>
+          <option value="front_gate">🚪 Front Gate</option>
+          <option value="back_gate">🚪 Back Gate</option>
+        </select>
+      </div>
+    </div>
+    <div class="route-opts">
+      <label><input type="checkbox" id="accessCheck" style="accent-color:var(--accent)"> ♿ Use lift (wheelchair route)</label>
+      <label><input type="checkbox" id="avoidCrowd" style="accent-color:var(--accent)"> 👥 Avoid peak-hour corridors</label>
+    </div>
+    <button class="route-btn" onclick="calculateRoute()">🧭 Get Step-by-Step Directions</button>
+    <div class="route-result" id="routeResult">
+      <div class="route-steps" id="routeSteps"></div>
+      <div class="route-meta" id="routeMeta"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CAMPUSBOT ==================== -->
+<section class="section" id="assistant">
+  <div class="section-tag">AI ASSISTANT</div>
+  <h2 class="section-title">Chat with <span>CampusBot</span></h2>
+  <p class="section-desc">Ask anything about KLH Bachupally — where to find a room, which floor, directions, timings, or general campus info. Powered by Claude AI.</p>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-info">
+        <h3>CampusBot — KLH Bachupally</h3>
+        <p>● Online · Powered by Claude AI · Knows the full building layout</p>
+      </div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="msg bot">👋 Hi! I'm CampusBot for KLH University Bachupally. I know every floor and room of the main building — just ask me where to go, how to get there, what's on each floor, timings, or anything else!<div class="ai-badge">⚡ Claude AI</div></div>
+    </div>
+    <div class="quick-chips">
+      <div class="chip" onclick="sendChip('Where is the cafeteria and how do I reach it from the front gate?')">🍽️ Cafeteria</div>
+      <div class="chip" onclick="sendChip('Where is the IoT lab and which floor is it on?')">📡 IoT Lab</div>
+      <div class="chip" onclick="sendChip('How do I get to the auditorium from ground floor?')">🎭 Auditorium</div>
+      <div class="chip" onclick="sendChip('Where is the dispensary?')">🏥 Dispensary</div>
+      <div class="chip" onclick="sendChip('Which floor is the SAC office on?')">🎓 SAC Office</div>
+      <div class="chip" onclick="sendChip('Where are the washrooms near the 2nd floor classrooms?')">🚻 Washrooms</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask anything about KLH Bachupally..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="chat-send" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FACULTY ==================== -->
+<section class="section" id="faculty">
+  <div class="section-tag">FACULTY FINDER</div>
+  <h2 class="section-title">Find <span>Faculty</span> & Rooms</h2>
+  <p class="section-desc">Search by name, department or room number to locate KLH Bachupally faculty.</p>
+  <div class="faculty-search">
+    <div class="faculty-search-bar">
+      <input type="text" id="facultyInput" placeholder="Search faculty, department, or room..." oninput="searchFaculty()">
+      <button class="faculty-search-btn" onclick="searchFaculty()">Search</button>
+    </div>
+    <div class="faculty-list" id="facultyList"></div>
+  </div>
+</section>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="section">
+  <div class="section-tag">FEATURES</div>
+  <h2 class="section-title">What <span>CampusIQ</span> Offers</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(0,245,212,0.1);">🏛️</div>
+      <h3>Floor-by-Floor Building Map</h3>
+      <p>Accurate interactive map of KLH Bachupally's main building — all 5 floors including basement. Click any room for info.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(247,37,133,0.1);">🧭</div>
+      <h3>Step-by-Step Directions</h3>
+      <p>Real turn-by-turn directions inside the building — which staircase, which corridor, which floor. Distance and time shown.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(114,9,183,0.1);">🤖</div>
+      <h3>Claude AI CampusBot</h3>
+      <p>Ask anything in plain English. CampusBot knows every floor, every room, and gives you accurate answers with directions.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(255,214,10,0.1);">👥</div>
+      <h3>Faculty Locator</h3>
+      <p>Find any faculty member's room and floor instantly. Get directions straight to their office from wherever you are.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(4,180,120,0.1);">♿</div>
+      <h3>Lift-Based Accessible Routes</h3>
+      <p>Enable wheelchair mode to get directions that only use lifts instead of stairs — available at every floor.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(99,60,200,0.15);">🎮</div>
+      <h3>Offline Blocks Game</h3>
+      <p>Full Tetris-style blocks game built in. Take a break between classes — works completely offline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GAME ==================== -->
+<section class="section" id="game">
+  <div class="section-tag">TAKE A BREAK</div>
+  <h2 class="section-title">Play <span>Blocks</span></h2>
+  <p class="section-desc">Bored between classes? Play a fully offline Tetris-style game right here in the browser.</p>
+  <div class="game-wrapper">
+    <div class="game-header">
+      <h3>🎮 Blocks</h3>
+      <div class="game-stats">
+        <div class="game-stat"><span id="g-score">0</span><span>Score</span></div>
+        <div class="game-stat"><span id="g-lines">0</span><span>Lines</span></div>
+        <div class="game-stat"><span id="g-level">1</span><span>Level</span></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:flex-start;gap:1rem;padding:1rem;background:#060e1c;">
+      <canvas id="tetris-board" width="200" height="400"></canvas>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;padding-top:0.5rem;">
+        <div style="font-size:0.68rem;color:var(--muted);font-family:'Space Mono',monospace;">NEXT</div>
+        <canvas id="next-canvas" width="80" height="80" style="background:#060e1c;border:1px solid rgba(0,245,212,0.1);border-radius:6px;"></canvas>
+        <div style="font-size:0.68rem;color:var(--muted);font-family:'Space Mono',monospace;margin-top:0.5rem;">BEST</div>
+        <div id="g-best" style="font-family:'Space Mono',monospace;font-size:1rem;color:var(--gold);">0</div>
+      </div>
+    </div>
+    <div class="game-controls">
+      <div class="game-btns">
+        <button class="game-btn primary" onclick="startGame()">▶ Start</button>
+        <button class="game-btn" onclick="pauseGame()">⏸ Pause</button>
+        <button class="game-btn" onclick="resetGame()">↺ Reset</button>
+      </div>
+      <div class="touch-controls">
+        <div></div>
+        <div class="tc-btn" onclick="gameMove('rotate')">↑</div>
+        <div></div>
+        <div class="tc-btn" onclick="gameMove('left')">←</div>
+        <div class="tc-btn" onclick="gameMove('down')">↓</div>
+        <div class="tc-btn" onclick="gameMove('right')">→</div>
+        <div></div>
+        <div class="tc-btn" onclick="gameMove('drop')" style="font-size:0.72rem;letter-spacing:-1px;">DROP</div>
+        <div></div>
+      </div>
+      <p class="game-hint">Arrow keys or buttons · Works offline</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🧭 CampusIQ</div>
+  <p>KLH University Bachupally — Main Building Navigation</p>
+  <p style="margin-top:0.3rem;font-size:0.72rem;">Basement · Ground · 1st · 2nd · 3rd · 4th Floor | CampusBot AI · Faculty Finder · Blocks Game</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== TOAST ====================
+function showToast(msg,dur=3200){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+// ==================== COUNTERS ====================
+function animCount(id,target){
+  let c=0,step=Math.ceil(target/55);
+  const el=document.getElementById(id);
+  const iv=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c>=target)clearInterval(iv);},28);
+}
+animCount('s1',6);animCount('s2',28);animCount('s3',32);animCount('s4',40);animCount('s5',4);
+
+// ==================== FLOOR TABS ====================
+function switchFloor(floor,btn){
+  document.querySelectorAll('.floor-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('floor-'+floor).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ==================== ROOM POPUP ====================
+function showRoom(title,desc){
+  const popup=document.getElementById('roomPopup');
+  document.getElementById('popupTitle').textContent=title;
+  document.getElementById('popupDesc').textContent=desc;
+  popup.style.display='block';
+  popup.style.left=(window.innerWidth/2-130)+'px';
+  popup.style.top='80px';
+  clearTimeout(window._popupTimer);
+  window._popupTimer=setTimeout(()=>popup.style.display='none',4000);
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.room-popup')&&!e.target.closest('svg'))
+    document.getElementById('roomPopup').style.display='none';
+});
+
+// ==================== ROUTE DATA ====================
+// Floor level codes: B=basement, G=ground, 1=1st, 2=2nd, 3=3rd, 4=4th
+const locInfo={
+  front_gate:{name:'Front Gate 🚪',floor:'G',side:'south'},
+  lobby:{name:'Lobby · Principal Office 🏛️',floor:'G',side:'right-wing'},
+  cafeteria:{name:'Cafeteria 🍽️',floor:'G',side:'left-lower'},
+  dispensary:{name:'Dispensary 🏥',floor:'G',side:'center'},
+  boys_cr:{name:'Boys Common Room 👨',floor:'G',side:'left'},
+  girls_cr:{name:'Girls Common Room 👩',floor:'G',side:'left'},
+  iot_lab:{name:'IoT Lab 📡',floor:'B',side:'right'},
+  it_lab:{name:'IT Lab 💻',floor:'B',side:'left'},
+  sac:{name:'SAC Office 🎓',floor:'1',side:'left'},
+  class_1f:{name:'Classrooms 📖',floor:'1',side:'center'},
+  class_2f:{name:'Classrooms 📖',floor:'2',side:'center'},
+  class_3f:{name:'Classrooms 📖',floor:'3',side:'center'},
+  aud_3f:{name:'Auditorium A 🎭',floor:'3',side:'left'},
+  hod_3f:{name:'HOD Office / Staff Room 👨‍🏫',floor:'3',side:'left-lower'},
+  aud_4f:{name:'Main Auditorium 🎭',floor:'4',side:'center'},
+  back_gate:{name:'Back Gate 🚪',floor:'G',side:'left-perimeter'},
+};
+
+const floorOrder={B:-1,G:0,'1':1,'2':2,'3':3,'4':4};
+const floorLabel={B:'Basement',G:'Ground Floor','1':'1st Floor','2':'2nd Floor','3':'3rd Floor','4':'4th Floor'};
+
+function buildRoute(from,to,useLifts){
+  const fInfo=locInfo[from],tInfo=locInfo[to];
+  if(!fInfo||!tInfo)return null;
+  const fFloor=floorOrder[fInfo.floor],tFloor=floorOrder[tInfo.floor];
+  const steps=[];
+  // Step 1: start
+  steps.push({label:fInfo.name,
+    instruction:`Start at the ${fInfo.name} on the ${floorLabel[fInfo.floor]}.`,
+    dist:0,landmark:`Your current location — ${floorLabel[fInfo.floor]}`});
+
+  // Move to corridor if needed
+  let cDist=30;
+  if(fFloor===tFloor){
+    // Same floor
+    steps.push({label:`${floorLabel[fInfo.floor]} Corridor`,
+      instruction:`Head to the main corridor on the ${floorLabel[fInfo.floor]}. Follow the corridor signs.`,
+      dist:cDist,landmark:'Corridor — centre of the floor'});
+    cDist+=40;
+    steps.push({label:tInfo.name,
+      instruction:`Walk to ${tInfo.name}. It is on the ${tInfo.side} side of the floor.`,
+      dist:cDist+30,landmark:'Destination'});
+  } else {
+    // Need to change floor
+    steps.push({label:`${floorLabel[fInfo.floor]} Corridor`,
+      instruction:`Head to the main corridor. Walk toward the ${useLifts?'lift 🛗':'staircase 🪜'} in the building.`,
+      dist:cDist,landmark:`Corridor — ${floorLabel[fInfo.floor]}`});
+    cDist+=40;
+
+    // Going to basement needs special case
+    if(tFloor===-1&&fFloor===0){
+      steps.push({label:'Stairs Near Front Gate',
+        instruction:'Locate the staircase near the Front Gate entrance. It leads down to the Basement labs.',
+        dist:cDist,landmark:'Stairs sign near Front Gate area'});
+      cDist+=30;
+      steps.push({label:'Basement Level',
+        instruction:'Walk down one floor to the Basement. The labs are directly accessible from the staircase landing.',
+        dist:cDist+25,landmark:'Basement — bottom level'});
+      cDist+=25;
+    } else if(fFloor===-1&&tFloor===0){
+      steps.push({label:'Stairs Upward',
+        instruction:'Take the staircase up from the Basement to the Ground Floor.',
+        dist:cDist,landmark:'Basement stairs'});
+      cDist+=30;
+      steps.push({label:'Ground Floor',
+        instruction:'Arrive at Ground Floor. Proceed to your destination from here.',
+        dist:cDist+25,landmark:'Ground floor landing'});
+      cDist+=25;
+    } else {
+      const verb=fFloor<tFloor?'up':'down';
+      const diff=Math.abs(fFloor-tFloor);
+      if(useLifts){
+        steps.push({label:`Lift — ${floorLabel[fInfo.floor]}`,
+          instruction:`Enter the lift on the ${floorLabel[fInfo.floor]}. The lift is marked with a 🛗 symbol near the corridor centre.`,
+          dist:cDist,landmark:'Lift — yellow doors'});
+        cDist+=20;
+        steps.push({label:`Lift — ${floorLabel[tInfo.floor]}`,
+          instruction:`Press ${tInfo.floor} and ride ${verb} to the ${floorLabel[tInfo.floor]}. Exit the lift.`,
+          dist:cDist+20,landmark:`Lift exit — ${floorLabel[tInfo.floor]}`});
+        cDist+=20;
+      } else {
+        steps.push({label:`Staircase — ${floorLabel[fInfo.floor]}`,
+          instruction:`Find the staircase on the ${floorLabel[fInfo.floor]} (marked 🪜). Walk ${verb} ${diff} floor${diff>1?'s':''}.`,
+          dist:cDist,landmark:'Staircase — near corridor end'});
+        cDist+=diff*30;
+        steps.push({label:`${floorLabel[tInfo.floor]} Landing`,
+          instruction:`Arrive at the ${floorLabel[tInfo.floor]} staircase landing. Step out into the corridor.`,
+          dist:cDist,landmark:`${floorLabel[tInfo.floor]} staircase exit`});
+        cDist+=15;
+      }
+    }
+    // Final step
+    steps.push({label:tInfo.name,
+      instruction:`From the corridor, head ${tInfo.side==='left'||tInfo.side==='left-lower'||tInfo.side==='left-wing'?'left (west)':tInfo.side==='right-wing'?'right (east)':'straight'} to reach ${tInfo.name}.`,
+      dist:cDist+35,landmark:'Destination'});
+  }
+  return steps;
+}
+
+function calculateRoute(){
+  const from=document.getElementById('fromLoc').value;
+  const to=document.getElementById('toLoc').value;
+  const lifts=document.getElementById('accessCheck').checked;
+  if(from===to){showToast('⚠️ Start and destination are the same!');return;}
+  const steps=buildRoute(from,to,lifts);
+  if(!steps){showToast('Route not found. Try CampusBot for help!');return;}
+  const totalDist=steps[steps.length-1].dist;
+  const walkTime=Math.ceil(totalDist/60);
+  const stepsDiv=document.getElementById('routeSteps');
+  const metaDiv=document.getElementById('routeMeta');
+  const result=document.getElementById('routeResult');
+  stepsDiv.innerHTML=steps.map((s,i)=>{
+    const isStart=i===0,isEnd=i===steps.length-1;
+    const seg=i>0?(s.dist-steps[i-1].dist):0;
+    return`<div class="route-step">
+      <div class="step-dot ${isStart?'start':isEnd?'end':'mid'}">${i+1}</div>
+      <div class="step-info">
+        <h4>${s.label}</h4>
+        <p>${s.instruction}</p>
+        ${s.landmark?`<p class="step-lm">📍 ${s.landmark}</p>`:''}
+        ${seg>0?`<p class="step-dist">↕ ~${seg}m from previous</p>`:''}
+      </div></div>`;
+  }).join('');
+  metaDiv.innerHTML=`
+    <div class="meta-item"><div class="meta-val">~${totalDist}m</div><div class="meta-key">Total Distance</div></div>
+    <div class="meta-item"><div class="meta-val">~${walkTime} min</div><div class="meta-key">Walking Time</div></div>
+    <div class="meta-item"><div class="meta-val">${steps.length-1}</div><div class="meta-key">Waypoints</div></div>
+    ${lifts?'<div class="meta-item"><div class="meta-val">🛗 Lift</div><div class="meta-key">Mode</div></div>':'<div class="meta-item"><div class="meta-val">🪜 Stairs</div><div class="meta-key">Mode</div></div>'}
+  `;
+  result.classList.add('show');
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+  showToast(`✅ Route ready! ~${walkTime} min · ~${totalDist}m`);
+}
+
+// ==================== CAMPUSBOT ====================
+const chatBody=document.getElementById('chatBody');
+let chatHistory=[];
+function addMsg(text,type){
+  const div=document.createElement('div');
+  div.className='msg '+type;
+  div.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  chatBody.appendChild(div);chatBody.scrollTop=chatBody.scrollHeight;
+  return div;
+}
+function showTyping(){
+  const div=document.createElement('div');div.className='msg typing';div.id='typing';
+  div.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
+  chatBody.appendChild(div);chatBody.scrollTop=chatBody.scrollHeight;
+}
+function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+
+async function sendMsg(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();if(!text)return;
+  input.value='';addMsg(text,'user');
+  chatHistory.push({role:'user',content:text});
+  showTyping();
+  const sys=`You are CampusBot, the navigation and information assistant for KLH University, Bachupally Campus, Hyderabad.
+
+IMPORTANT: KLH Bachupally is a SINGLE main building with the following floors:
+
+BASEMENT (-1 Floor):
+- IT Lab 1 (60 computers — Java, Python, DBMS practicals)
+- IT Lab 2 (60 computers — Networks, OS practicals)
+- IoT Lab (Raspberry Pi, Arduino, embedded systems)
+- Server Room, Electrical Room, Store Room
+- Access: via stairs near the Front Gate on ground floor
+
+GROUND FLOOR (0 Floor):
+- Front Gate (main entrance, south side, security checkpoint, buses outside on left)
+- Back Gate (secondary exit, left perimeter)
+- Lobby + Principal's Office + Accounts Section (right wing — reception, fees, admin)
+- Girls Common Room (left side — rest area, lockers for female students)
+- Boys Common Room (left side — rest area, lockers for male students)
+- Dispensary (center — first aid, medicines, doctor on certain days)
+- Cafeteria (left-lower area — 7:30 AM to 9:30 PM, Mon–Sat)
+- Bus parking area (outside left of main building)
+- Lift (near lobby, connects all floors)
+- Washrooms: Boys and Girls washrooms on ground floor
+
+1ST FLOOR:
+- SAC Office (Student Activity Centre — left side; handles clubs, events, fests, sports)
+- Classrooms — Left Wing (CSE, ECE, IT departments)
+- Classrooms — Right Wing (MECH, CIVIL, MBA)
+- Boys Washroom and Girls Washroom
+- Lift access on this floor
+
+2ND FLOOR:
+- Classrooms (all departments — CSE, ECE, MECH, CIVIL, IT, MBA)
+- Boys Washroom and Girls Washroom
+- Lift access
+
+3RD FLOOR:
+- Auditorium A (~300 seats, AC, stage, projector, mic — seminars, guest lectures, cultural events)
+- Classrooms (final year batches)
+- HOD Offices / Staff Room (faculty meet students here)
+- Boys Washroom and Girls Washroom
+- Lift access
+
+4TH FLOOR (Top Floor):
+- Main Auditorium (~600 seats, full AV, AC — convocation, major fests, mega-events)
+- Faculty Lounge
+- Boys Washroom and Girls Washroom
+- Lift access
+- Terrace (restricted)
+
+Lifts: Available on every floor from Ground to 4th. Stairs also available on every floor.
+
+Always give specific floor, directions (which side of the corridor), and useful info like timings. Be friendly and concise. If asked how to get somewhere, give step-by-step directions.`;
+
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:chatHistory})
+    });
+    const data=await r.json();removeTyping();
+    if(data.content&&data.content[0]){
+      const reply=data.content[0].text;
+      chatHistory.push({role:'assistant',content:reply});
+      const m=addMsg(reply,'bot');
+      const b=document.createElement('div');b.className='ai-badge';b.textContent='⚡ Claude AI';m.appendChild(b);
+    } else addMsg('⚠️ Sorry, couldn\'t connect. Try again!','bot');
+  } catch(e){removeTyping();addMsg('⚠️ Connection error. Please check your internet.','bot');}
+}
+function sendChip(t){document.getElementById('chatInput').value=t;sendMsg();}
+
+// ==================== FACULTY ====================
+const facultyData=[
+  {name:'Dr. K. Srinivas Rao',dept:'CSE',room:'Room 201',block:'1st Floor',avatar:'KS',color:'rgba(0,245,212,0.2)',tc:'#00f5d4'},
+  {name:'Prof. V. Lakshmi',dept:'ECE',room:'Room 102',block:'1st Floor',avatar:'VL',color:'rgba(247,37,133,0.2)',tc:'#f72585'},
+  {name:'Dr. M. Ravi Kumar',dept:'MECH',room:'Room 305',block:'3rd Floor',avatar:'MR',color:'rgba(114,9,183,0.2)',tc:'#b35efb'},
+  {name:'Dr. P. Anand',dept:'Civil',room:'Room 401',block:'2nd Floor',avatar:'PA',color:'rgba(255,214,10,0.2)',tc:'#ffd60a'},
+  {name:'Prof. S. Padmaja',dept:'CSE',room:'Room 203',block:'2nd Floor',avatar:'SP',color:'rgba(0,245,212,0.2)',tc:'#00f5d4'},
+  {name:'Dr. R. Kishore',dept:'ECE',room:'IT Lab 2',block:'Basement',avatar:'RK',color:'rgba(247,37,133,0.2)',tc:'#f72585'},
+  {name:'Prof. N. Suresh',dept:'MBA',room:'HOD Office',block:'3rd Floor',avatar:'NS',color:'rgba(114,9,183,0.2)',tc:'#b35efb'},
+  {name:'Dr. A. Venkateswara',dept:'CSE',room:'Room 205',block:'2nd Floor',avatar:'AV',color:'rgba(0,245,212,0.2)',tc:'#00f5d4'},
+  {name:'Prof. T. Anuradha',dept:'MECH',room:'HOD Office',block:'3rd Floor',avatar:'TA',color:'rgba(255,214,10,0.2)',tc:'#ffd60a'},
+];
+function renderFaculty(data){
+  const list=document.getElementById('facultyList');
+  if(!data.length){list.innerHTML='<p style="color:var(--muted);text-align:center;padding:1.5rem;">No results found.</p>';return;}
+  list.innerHTML=data.map(f=>`
+    <div class="faculty-card">
+      <div class="faculty-info">
+        <div class="faculty-avatar" style="background:${f.color};color:${f.tc}">${f.avatar}</div>
+        <div class="faculty-details"><h4>${f.name}</h4><p>${f.dept} · ${f.block}</p></div>
+      </div>
+      <div class="faculty-room">
+        <span>${f.room}</span><small>${f.block}</small>
+        <div class="route-tag" onclick="showToast('🧭 Route: Enter Front Gate → Take stairs/lift to ${f.block} → ${f.room}')">📍 Get Route →</div>
+      </div>
+    </div>`).join('');
+}
+function searchFaculty(){
+  const q=document.getElementById('facultyInput').value.toLowerCase();
+  if(!q){renderFaculty(facultyData);return;}
+  renderFaculty(facultyData.filter(f=>f.name.toLowerCase().includes(q)||f.dept.toLowerCase().includes(q)||f.room.toLowerCase().includes(q)||f.block.toLowerCase().includes(q)));
+}
+renderFaculty(facultyData);
+
+// ==================== TETRIS ====================
+const BW=10,BH=20,CS=20;
+const COLORS=['#00f5d4','#f72585','#7209b7','#ffd60a','#ff6b35','#4cc9f0','#06d6a0'];
+const PIECES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
+let board,curP,curX,curY,curC,nextP,nextC,score,lines,level,running,paused,giv,best=0;
+const cv=document.getElementById('tetris-board'),ctx=cv.getContext('2d');
+const nc=document.getElementById('next-canvas'),nctx=nc.getContext('2d');
+function nBoard(){return Array.from({length:BH},()=>Array(BW).fill(0));}
+function rPiece(){const i=Math.floor(Math.random()*PIECES.length);return{s:PIECES[i],c:COLORS[i]};}
+function drawC(cx,x,y,color,sz=CS){cx.fillStyle=color;cx.fillRect(x*sz+1,y*sz+1,sz-2,sz-2);cx.fillStyle='rgba(255,255,255,0.13)';cx.fillRect(x*sz+1,y*sz+1,sz-2,3);}
+function drawB(){
+  ctx.fillStyle='#060e1c';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.strokeStyle='rgba(0,245,212,0.04)';ctx.lineWidth=0.5;
+  for(let y=0;y<BH;y++)for(let x=0;x<BW;x++)ctx.strokeRect(x*CS,y*CS,CS,CS);
+  for(let y=0;y<BH;y++)for(let x=0;x<BW;x++)if(board[y][x])drawC(ctx,x,y,board[y][x]);
+  if(curP){
+    curP.forEach((r,dy)=>r.forEach((v,dx)=>{if(v)drawC(ctx,curX+dx,curY+dy,curC);}));
+    if(running&&!paused){
+      let gy=curY;while(valid(curP,curX,gy+1))gy++;
+      if(gy!==curY)curP.forEach((r,dy)=>r.forEach((v,dx)=>{if(v){ctx.fillStyle='rgba(255,255,255,0.08)';ctx.fillRect((curX+dx)*CS+1,(gy+dy)*CS+1,CS-2,CS-2);}}));
+    }
+  }
+}
+function drawN(){
+  nctx.fillStyle='#060e1c';nctx.fillRect(0,0,80,80);
+  if(!nextP)return;
+  const ox=Math.floor((4-nextP[0].length)/2),oy=Math.floor((4-nextP.length)/2);
+  nextP.forEach((r,dy)=>r.forEach((v,dx)=>{if(v)drawC(nctx,ox+dx,oy+dy,nextC,16);}));
+}
+function valid(p,x,y){return p.every((r,dy)=>r.every((v,dx)=>{if(!v)return true;const nx=x+dx,ny=y+dy;return nx>=0&&nx<BW&&ny<BH&&(!board[ny]||!board[ny][nx]);}));}
+function place(){
+  curP.forEach((r,dy)=>r.forEach((v,dx)=>{if(v)board[curY+dy][curX+dx]=curC;}));
+  let cl=0;
+  for(let y=BH-1;y>=0;){if(board[y].every(c=>c)){board.splice(y,1);board.unshift(Array(BW).fill(0));cl++;}else y--;}
+  if(cl>0){const pts=[0,100,300,500,800][cl]*level;score+=pts;lines+=cl;level=Math.floor(lines/10)+1;
+    document.getElementById('g-score').textContent=score;document.getElementById('g-lines').textContent=lines;document.getElementById('g-level').textContent=level;
+    clearInterval(giv);giv=setInterval(tick,Math.max(80,500-(level-1)*40));}
+  const np=rPiece();curP=nextP;curC=nextC;nextP=np.s;nextC=np.c;drawN();
+  curX=Math.floor(BW/2)-1;curY=0;
+  if(!valid(curP,curX,curY)){gameOver();}
+}
+function tick(){if(!valid(curP,curX,curY+1))place();else curY++;drawB();}
+function gameOver(){
+  running=false;clearInterval(giv);
+  if(score>best){best=score;document.getElementById('g-best').textContent=best;}
+  ctx.fillStyle='rgba(5,11,20,0.82)';ctx.fillRect(0,BH*CS/2-38,BW*CS,76);
+  ctx.fillStyle='#f72585';ctx.font='bold 18px Syne,sans-serif';ctx.textAlign='center';
+  ctx.fillText('GAME OVER',BW*CS/2,BH*CS/2-12);
+  ctx.fillStyle='#00f5d4';ctx.font='12px Space Mono,monospace';
+  ctx.fillText('Score: '+score,BW*CS/2,BH*CS/2+12);
+}
+function startGame(){
+  board=nBoard();score=0;lines=0;level=1;
+  ['g-score','g-lines','g-level'].forEach((id,i)=>document.getElementById(id).textContent=i===2?'1':'0');
+  const cp=rPiece();curP=cp.s;curC=cp.c;curX=Math.floor(BW/2)-1;curY=0;
+  const np=rPiece();nextP=np.s;nextC=np.c;drawN();
+  running=true;paused=false;clearInterval(giv);giv=setInterval(tick,500);drawB();
+}
+function pauseGame(){
+  if(!running)return;paused=!paused;
+  if(paused){clearInterval(giv);ctx.fillStyle='rgba(5,11,20,0.72)';ctx.fillRect(0,BH*CS/2-22,BW*CS,44);
+    ctx.fillStyle='#ffd60a';ctx.font='bold 16px Syne,sans-serif';ctx.textAlign='center';ctx.fillText('PAUSED',BW*CS/2,BH*CS/2+5);}
+  else{giv=setInterval(tick,Math.max(80,500-(level-1)*40));drawB();}
+}
+function resetGame(){clearInterval(giv);running=false;paused=false;board=nBoard();drawB();curP=null;}
+function gameMove(d){
+  if(!running||paused)return;
+  if(d==='left'&&valid(curP,curX-1,curY))curX--;
+  else if(d==='right'&&valid(curP,curX+1,curY))curX++;
+  else if(d==='down'){if(valid(curP,curX,curY+1))curY++;else place();}
+  else if(d==='rotate'){const r=curP[0].map((_,i)=>curP.map(row=>row[i]).reverse());
+    if(valid(r,curX,curY))curP=r;else if(valid(r,curX+1,curY)){curP=r;curX++;}else if(valid(r,curX-1,curY)){curP=r;curX--;}}
+  else if(d==='drop'){while(valid(curP,curX,curY+1))curY++;place();}
+  drawB();
+}
+document.addEventListener('keydown',e=>{
+  // Don't intercept keys when typing in any input or textarea
+  const tag=document.activeElement.tagName.toLowerCase();
+  if(tag==='input'||tag==='textarea'||document.activeElement.isContentEditable) return;
+  const m={'ArrowLeft':'left','ArrowRight':'right','ArrowDown':'down','ArrowUp':'rotate',' ':'drop'};
+  if(m[e.key]){e.preventDefault();gameMove(m[e.key]);}
+});
+board=nBoard();drawB();
+
+// ==================== SCROLL ANIM ====================
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});
+},{threshold:0.1});
+document.querySelectorAll('.feature-card,.stat-card').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(20px)';
+  el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);
+});
+</script>
+</body>
+</html>
